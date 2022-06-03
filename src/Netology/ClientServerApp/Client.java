@@ -11,7 +11,7 @@ public class Client implements Runnable {
     @Override
     public void run() {
         Scanner scanner = new Scanner(System.in);
-        String host = "localhost";
+        String host = "netology.homework";
         try (Socket clientSocket = new Socket(host, 8080);
              PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
              BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())))
