@@ -10,24 +10,20 @@ import java.util.Scanner;
 public class Client implements Runnable {
     @Override
     public void run() {
-        Scanner scanner = new Scanner(System.in);
-        String host = "netology.homework";
+        String host = "localhost";
         try (Socket clientSocket = new Socket(host, 8080);
              PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream())))
-        {
+             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+             Scanner scanner = new Scanner(System.in)
+        ) {
             out.println("Client");
-            System.out.println(String.format("Client terminal message: %s ",in.readLine()));
-            while(in.read() > -1) {
+            System.out.println(String.format("Client terminal message: %s ", in.readLine()));
+            while (in.read() > -1) {
                 String incomeMessage = in.readLine();
-                System.out.print(String.format("Client terminal message: %s ",incomeMessage));
+                System.out.print(String.format("Client terminal message: %s ", incomeMessage));
                 out.println(scanner.nextLine());
                 Thread.sleep(500);
             }
-            in.close();
-            out.close();
-            clientSocket.close();
-            scanner.close();
         } catch (IOException e) {
             e.getMessage();
         } catch (InterruptedException e) {
